@@ -51,7 +51,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="GunControl.ini" />
+    <None Include="GunControl.ini">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
