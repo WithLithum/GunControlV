@@ -11,10 +11,17 @@ namespace GunControl
     {
         private readonly List<Ped> _swappedPeds = new List<Ped>();
 
+        internal static bool DoAllowSwatTeamWeapons { get; private set; }
+
+        internal static int GangMemberWeaponPrecentage { get; private set; }
+
         public Main()
         {
             this.Interval = 250;
             this.Tick += Main_Tick;
+
+            DoAllowSwatTeamWeapons = Settings.GetValue("Peds", "AllowSwatWeapons", true);
+            GangMemberWeaponPrecentage = Settings.GetValue("Peds", "GangMemberWeaponChance", 5);
         }
 
         private void Main_Tick(object sender, EventArgs e)

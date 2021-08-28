@@ -23,11 +23,10 @@ namespace GunControl
 
         internal static void SwapNow(Ped ped)
         {
-            ped.Weapons.RemoveAll();
-            if (ped.IsGangMember())
+            if (ped.IsGangMember() && new Random().Next(0, 100) > Main.GangMemberWeaponPrecentage)
             {
-                var randomInt = new Random(new Random().Next()).Next(1, 4);
-                switch (randomInt)
+                ped.Weapons.RemoveAll();
+                switch (new Random(new Random().Next()).Next(1, 4))
                 {
                     case 1:
                         ped.Weapons.Give(WeaponHash.Knife, 1, true, true);
@@ -40,9 +39,14 @@ namespace GunControl
                         break;
                 }
             }
-            if (ped.IsCop())
+            else if (ped.IsCop() && ped.Model != PedHash.Swat01SMY)
             {
+                ped.Weapons.RemoveAll();
                 ped.Weapons.Give(WeaponHash.Nightstick, 1, false, false);
+            }
+            else
+            {
+                ped.Weapons.RemoveAll();
             }
         }
     }

@@ -50,5 +50,8 @@
       <Version>3.1.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="GunControl.ini" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
