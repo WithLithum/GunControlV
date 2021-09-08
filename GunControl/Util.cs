@@ -7,9 +7,12 @@ namespace GunControl
     {
         internal static bool IsGangMember(this Ped ped)
         {
-            return ped.RelationshipGroup == "AMBIENT_GANG_LOST" || ped.RelationshipGroup == "AMBIENT_GANG_MEXICAN" || ped.RelationshipGroup == "AMBIENT_GANG_FAMILY"
-                || ped.RelationshipGroup == "AMBIENT_GANG_BALLAS" || ped.RelationshipGroup == "AMBIENT_GANG_MARABUNTE" || ped.RelationshipGroup == "AMBIENT_GANG_CULT"
-                || ped.RelationshipGroup == "AMBIENT_GANG_SALVA" || ped.RelationshipGroup == "AMBIENT_GANG_WEICHENG" || ped.RelationshipGroup == "AMBIENT_GANG_HILLBILLY";
+            foreach (var group in Main.GangGroups)
+            {
+                if (ped.RelationshipGroup == group) return true;
+            }
+
+            return false;
         }
 
         internal static bool IsCop(this Ped ped)
