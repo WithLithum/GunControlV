@@ -15,6 +15,8 @@ namespace GunControl
 
         internal static int GangMemberWeaponPrecentage { get; private set; }
 
+        internal static int LevelOfArmed { get; private set; }
+
         public Main()
         {
             this.Interval = 250;
@@ -22,6 +24,7 @@ namespace GunControl
 
             DoAllowSwatTeamWeapons = Settings.GetValue("Peds", "AllowSwatWeapons", true);
             GangMemberWeaponPrecentage = Settings.GetValue("Peds", "GangMemberWeaponChance", 5);
+            LevelOfArmed = Settings.GetValue("Wanted", "LevelOfArmed", 3);
         }
 
         private void Main_Tick(object sender, EventArgs e)
