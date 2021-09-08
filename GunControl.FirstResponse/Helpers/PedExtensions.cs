@@ -14,10 +14,13 @@ namespace GunControl.FirstResponse.Helpers
         {
             if (ped == null) throw new ArgumentNullException(nameof(ped));
             if (!ped.IsValid()) throw new InvalidHandleableException(ped);
+            
+            foreach (var group in ConfigUtil.GangGroups)
+            {
+                if (ped.RelationshipGroup == group) return true;
+            }
 
-            return ped.RelationshipGroup == RelationshipGroup.AmbientGangBallas || ped.RelationshipGroup == RelationshipGroup.AmbientGangCult || ped.RelationshipGroup == RelationshipGroup.AmbientGangFamily
-                || ped.RelationshipGroup == RelationshipGroup.AmbientGangHillbilly || ped.RelationshipGroup == RelationshipGroup.AmbientGangLost || ped.RelationshipGroup == RelationshipGroup.AmbientGangMarabunte
-                || ped.RelationshipGroup == RelationshipGroup.AmbientGangMexican || ped.RelationshipGroup == RelationshipGroup.AmbientGangSalva || ped.RelationshipGroup == RelationshipGroup.AmbientGangWeicheng;
+            return false;
         }
     }
 }
