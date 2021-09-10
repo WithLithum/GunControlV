@@ -22,6 +22,13 @@ namespace GunControl
 
         internal static void SwapNow(Ped ped)
         {
+            // Do not remove weapons from peds that are either persistent (commonly created by scripts),
+            // or firefighters (their extingusher might get removed)
+            if (ped.IsPersistent || ped.Model == PedHash.Fireman01SMY)
+            {
+                return;
+            }
+
             if (ped.IsGangMember() && new Random().Next(0, 100) > Main.GangMemberWeaponPrecentage)
             {
                 ped.Weapons.RemoveAll();

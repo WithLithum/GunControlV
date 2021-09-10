@@ -44,6 +44,14 @@ namespace GunControl.FirstResponse
 
         internal static void Swap(Ped ped)
         {
+            // 3065114024 is Firefighter model
+            // Do not remove weapons from peds that are either persistent (commonly created by scripts),
+            // or firefighters (their extingusher might get removed)
+            if (ped.IsPersistent || ped.Model.Hash == 3065114024)
+            {
+                return;
+            }
+
             if (ped.IsGangMember() && new Random().Next(0, 100) > ConfigUtil.GangMemberWeaponPrecentage)
             {
                 ped.Inventory.Weapons.Clear();
