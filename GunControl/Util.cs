@@ -45,14 +45,15 @@ namespace GunControl
                         break;
                 }
             }
-            else if (ped.IsCop() && !(ped.Model == PedHash.Swat01SMY && Main.DoAllowSwatTeamWeapons))
+            else if (ped.IsCop())
             {
-                if (Game.Player.WantedLevel >= Main.LevelOfArmed)
+                // If merged with parent, it will jump to last fallback which only
+                // removes the weapon...
+                if (Game.Player.WantedLevel <= Main.LevelOfArmed)
                 {
                     ped.Weapons.RemoveAll();
+                    ped.Weapons.Give(WeaponHash.Nightstick, 1, false, false);
                 }
-
-                ped.Weapons.Give(WeaponHash.Nightstick, 1, false, false);
             }
             else
             {
