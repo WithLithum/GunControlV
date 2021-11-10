@@ -23,16 +23,19 @@ namespace GunControl
 
         public Main()
         {
+            // Initializes the script tick
             this.Interval = 250;
             this.Tick += Main_Tick;
 
+            // Initialize config
             DoAllowSwatTeamWeapons = Settings.GetValue("Peds", "AllowSwatWeapons", true);
             GangMemberWeaponPrecentage = Settings.GetValue("Peds", "GangMemberWeaponChance", 5);
             LevelOfArmed = Settings.GetValue("Wanted", "LevelOfArmed", 3);
 
+            // cache the values first
             var strings = Settings.GetValue("Misc", "GangGroups", "AMBIENT_GANG_LOST,AMBIENT_GANG_MEXICAN,AMBIENT_GANG_FAMILY,AMBIENT_GANG_BALLAS,AMBIENT_GANG_MARABUNTE,AMBIENT_GANG_CULT,AMBIENT_GANG_SALVA,AMBIENT_GANG_WEICHENG,AMBIENT_GANG_HILLBILLY");
 #pragma warning disable S3010 // Static fields should not be updated in constructors
-            GangGroups = strings.Split(',');
+            GangGroups = strings.Split(','); // Read gang groups configuration as an enum
 #pragma warning restore S3010 // Static fields should not be updated in constructors
         }
 
@@ -40,6 +43,8 @@ namespace GunControl
         {
             foreach (var ped in World.GetAllPeds())
             {
+                // Loop through all peds
+                // Thread blocking will decrease FPS
                 Yield();
                 if (ped?.Exists() != true) continue;
                 if (_swappedPeds.Contains(ped)) continue;
