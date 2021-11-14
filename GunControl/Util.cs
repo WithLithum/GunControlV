@@ -49,17 +49,11 @@ namespace GunControl
             {
                 // If merged with parent, it will jump to last fallback which only
                 // removes the weapon...
-                if (ped.Model != PedHash.Swat01SMY && Game.Player.WantedLevel <= Main.LevelOfArmed)
+                if (Game.Player.WantedLevel < Main.LevelOfArmed)
                 {
                     ped.Weapons.RemoveAll();
                     ped.Weapons.Give(WeaponHash.Nightstick, 1, false, false);
                     return;
-                }
-
-                if (ped.Model == PedHash.Swat01SMY || !Main.DoAllowSwatTeamWeapons)
-                {
-                    ped.Weapons.RemoveAll();
-                    ped.Weapons.Give(WeaponHash.Nightstick, 1, false, false);
                 }
             }
             else
