@@ -5,6 +5,9 @@ namespace GunControl
 {
     internal static class Util
     {
+        internal static ScanType ScanType { get; set; }
+        internal static float ScanRange { get; set; }
+
         internal static bool IsGangMember(this Ped ped)
         {
             foreach (var group in Main.GangGroups)
@@ -18,6 +21,18 @@ namespace GunControl
         internal static bool IsCop(this Ped ped)
         {
             return ped.RelationshipGroup == "COP";
+        }
+
+        internal static Ped[] ScanPeds()
+        {
+            switch (ScanType)
+            {
+                default:
+                    return World.GetAllPeds();
+
+                case ScanType.Ranged:
+                    return World.GetNearbyPeds(Game.Player.Character, ScanRange);
+            }
         }
 
         internal static void SwapNow(Ped ped)
