@@ -34,6 +34,7 @@ namespace GunControl
 
             Util.ScanType = Settings.GetValue("Misc", "ScanType", ScanType.All);
             Util.ScanRange = Settings.GetValue("Misc", "ScanRange", 250f);
+            Util.MaximumGangWeaponCount = Settings.GetValue("Peds", "MaximumGangMembersWithWeapons", 5);
 
             // cache the values first
             var strings = Settings.GetValue("Misc", "GangGroups", "AMBIENT_GANG_LOST,AMBIENT_GANG_MEXICAN,AMBIENT_GANG_FAMILY,AMBIENT_GANG_BALLAS,AMBIENT_GANG_MARABUNTE,AMBIENT_GANG_CULT,AMBIENT_GANG_SALVA,AMBIENT_GANG_WEICHENG,AMBIENT_GANG_HILLBILLY");

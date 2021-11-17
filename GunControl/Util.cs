@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using GTA;
 
 namespace GunControl
@@ -7,6 +9,9 @@ namespace GunControl
     {
         internal static ScanType ScanType { get; set; }
         internal static float ScanRange { get; set; }
+        internal static int MaximumGangWeaponCount { get; set; }
+
+        private static readonly List<Ped> _gangMembers = new List<Ped>();
 
         internal static bool IsGangMember(this Ped ped)
         {
@@ -35,6 +40,18 @@ namespace GunControl
             }
         }
 
+        internal static void UpdateGangWeapons()
+        {
+            for (int i = 0; i < _gangMembers.Count; i++)
+            {
+                Script.Yield();
+                if (_gangMembers[i]?.Exists() != true || _gangMembers[i].IsDead || _gangMembers[i].IsPersistent)
+                {
+                    _gangMembers.RemoveAt(i);
+                }
+            }
+        }
+
         internal static void SwapNow(Ped ped)
         {
             // Do not remove weapons from peds that are either persistent (commonly created by scripts),
@@ -46,24 +63,18 @@ namespace GunControl
 
             if (ped.IsGangMember() && new Random().Next(0, 100) > Main.GangMemberWeaponPrecentage)
             {
-                ped.Weapons.RemoveAll();
-                switch (new Random(new Random().Next()).Next(1, 4))
+                if (_gangMembers.Count > MaximumGangWeaponCount)
                 {
-                    case 1:
-                        ped.Weapons.Give(WeaponHash.Knife, 1, true, true);
-                        break;
-                    case 2:
-                        ped.Weapons.Give(WeaponHash.Bat, 1, true, true);
-                        break;
-                    case 3:
-                        ped.Weapons.Give(WeaponHash.Bottle, 1, true, true);
-                        break;
+                    // Remove weapons at this time
+                    ped.Weapons.RemoveAll();
+                    return;
                 }
+
+                _gangMembers.Add(ped);
+                ped.Weapons.Give(WeaponHash.Pistol, 9999, true, true);
             }
             else if (ped.IsCop())
             {
-                // If merged with parent, it will jump to last fallback which only
-                // removes the weapon...
                 if (Game.Player.WantedLevel < Main.LevelOfArmed)
                 {
                     ped.Weapons.RemoveAll();
