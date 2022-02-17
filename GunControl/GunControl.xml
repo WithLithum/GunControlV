@@ -2,8 +2,8 @@
   This is the ruleset file of the Gun Control.
   As you can see, the rules are made of three parts:
   
-  - A name indicates which rule to check
-  - A condition indicates in what condition it will run
+  - A RuleName indicates which rule to check
+  - A Condition indicates in what condition it will run
   - A DoesClear indicates whether the mod processes that ped if matched
   
   The "False" option of the DoesClear overrides all options, means the LevelOfArmed
@@ -21,10 +21,12 @@
 <Rules>
   <Version>1</Version>
   <Contents>
+    <!-- Example 1: Uncomment if you want all gang members having guns-->
+    <!--
     <Rule>
-      <Name>GangMember</Name>
-      <Condition>True</Condition>
-      <DoesClear>False</DoesClear>
-    </Rule>
+      <RuleName>GangMember</RuleName>
+      <Condition>true</Condition>
+      <DoesClear>false</DoesClear>
+    </Rule>-->
   </Contents>
 </Rules>

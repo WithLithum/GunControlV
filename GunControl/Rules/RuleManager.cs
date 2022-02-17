@@ -11,23 +11,16 @@ namespace GunControl.Rules
         internal static readonly Dictionary<string, Type> Rules = new Dictionary<string, Type>();
         private static readonly List<IRule> activated = new List<IRule>();
 
-        internal static void RegisterRule(Type type)
+        internal static void RegisterRule(string name, Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
 
-            if (!(type.GetInterface("IRule") is IRule))
+            if (type.GetInterface("IRule") != typeof(IRule))
             {
-                throw new ArgumentException("Rule invalid!", nameof(type));
+                throw new ArgumentException("Rule did not inherit IRule.", nameof(type));
             }
 
-            var attr = type.GetCustomAttribute<RuleInfoAttribute>();
-
-            if (attr == null)
-            {
-                throw new ArgumentException("Rule invalid!", nameof(type));
-            }
-
-            Rules.Add(attr.Name, type);
+            Rules.Add(name, type);
         }
 
         internal static bool EvaluateRules(Ped ped)
@@ -45,6 +38,12 @@ namespace GunControl.Rules
 
         internal static void ParseRule(RuleDescriber describer)
         {
+            if (describer == null)
+            {
+                Notification.Show("Describer null - check parser");
+                return;
+            }
+
             if (!Rules.ContainsKey(describer.RuleName))
             {
                 Notification.Show("Rule is errored - there is no such rule");
@@ -53,6 +52,8 @@ namespace GunControl.Rules
 
             if (Activator.CreateInstance(Rules[describer.RuleName]) is IRule rule)
             {
+                rule.Condition = describer.Condition;
+                rule.OutcomeIfMeet = describer.DoesClear;
                 activated.Add(rule);
             }
         }

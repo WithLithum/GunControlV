@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.UI;
 
 namespace GunControl.Rules.Integrated
 {
@@ -13,6 +14,9 @@ namespace GunControl.Rules.Integrated
         {
             if (!bool.TryParse(Condition, out bool result))
             {
+#if DEBUG
+                Screen.ShowSubtitle($"Invalid value - {Condition} (should be {bool.TrueString} or {bool.FalseString})");
+#endif
                 // Go ahead and ignore
                 return true;
             }

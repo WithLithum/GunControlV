@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using GTA;
 using GunControl.Rules;
+using GunControl.Rules.Integrated;
 
 namespace GunControl
 {
@@ -58,6 +59,9 @@ namespace GunControl
             {
                 return;
             }
+
+            RuleManager.RegisterRule("Cop", typeof(CopRule));
+            RuleManager.RegisterRule("GangMember", typeof(GangRule));
 
             foreach (var rule in ruleset.Contents)
             {
