@@ -17,7 +17,8 @@ namespace GunControl
 
         internal static int ProcessingInterval { get; private set; }
 
-        internal static readonly List<int> GangGroups;
+        internal static readonly List<int> GangGroups
+            = new List<int>();
 
         public Main()
         {
