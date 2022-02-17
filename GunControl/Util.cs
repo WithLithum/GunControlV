@@ -103,7 +103,6 @@ namespace GunControl
                 {
                     ped.Weapons.RemoveAll();
                     ped.Weapons.Give(WeaponHash.Nightstick, 1, false, false);
-                    return;
                 }
             }
             else

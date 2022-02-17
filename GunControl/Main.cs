@@ -18,6 +18,8 @@ namespace GunControl
 
         internal static int LevelOfArmed { get; private set; }
 
+        internal static int ProcessingInterval { get; private set; }
+
 #pragma warning disable S2223 // Non-constant static fields should not be visible
         internal static string[] GangGroups;
 #pragma warning restore S2223 // Non-constant static fields should not be visible
@@ -32,6 +34,7 @@ namespace GunControl
             DoAllowSwatTeamWeapons = Settings.GetValue("Peds", "AllowSwatWeapons", true);
             GangMemberWeaponPrecentage = Settings.GetValue("Peds", "GangMemberWeaponChance", 5);
             LevelOfArmed = Settings.GetValue("Wanted", "LevelOfArmed", 3);
+            ProcessingInterval = Settings.GetValue("Misc", "ProcessingInterval", 0);
 
             Util.ScanType = Settings.GetValue("Misc", "ScanType", ScanType.All);
             Util.ScanRange = Settings.GetValue("Misc", "ScanRange", 250f);
@@ -50,7 +53,7 @@ namespace GunControl
             {
                 // Loop through all peds
                 // Thread blocking will decrease FPS
-                Yield();
+                Wait(ProcessingInterval);
                 if (ped?.Exists() != true) continue;
                 if (_swappedPeds.Contains(ped)) continue;
                 if (ped.IsDead || ped.IsPlayer) continue;
