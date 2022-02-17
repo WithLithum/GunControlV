@@ -19,7 +19,6 @@ namespace GunControl
             // The check is simple
             // All it does is compare peds' current group with every single groups defined in INI
 
-            // TODO: Calculate hash at startup so we don't have to calculate every single time
             foreach (var group in Main.GangGroups)
             {
                 if (ped.RelationshipGroup == group) return true;
