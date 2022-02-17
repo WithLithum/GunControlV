@@ -19,9 +19,12 @@
 -->
 
 <Rules>
-  <Rule>
-    <Name>GangMember</Name>
-    <Condition>True</Condition>
-    <DoesClear>False</DoesClear>
-  </Rule>
+  <Version>1</Version>
+  <Contents>
+    <Rule>
+      <Name>GangMember</Name>
+      <Condition>True</Condition>
+      <DoesClear>False</DoesClear>
+    </Rule>
+  </Contents>
 </Rules>
