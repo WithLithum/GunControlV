@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using GTA;
 using GunControl.Rules;
 
@@ -42,6 +44,24 @@ namespace GunControl
             foreach (var group in strings.Split(','))
             {
                 GangGroups.Add(Game.GenerateHash(group));
+            }
+
+            var parser = new XmlSerializer(typeof(Rules.Rules));
+            Rules.Rules ruleset;
+            
+            using (var stream = File.OpenRead("scripts\\GunControl.xml"))
+            {
+                ruleset = parser.Deserialize(stream) as Rules.Rules;
+            }
+
+            if (ruleset == null)
+            {
+                return;
+            }
+
+            foreach (var rule in ruleset.Contents)
+            {
+                RuleManager.ParseRule(rule);
             }
         }
 
