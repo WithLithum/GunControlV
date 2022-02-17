@@ -1,0 +1,27 @@
+﻿<!--
+  This is the ruleset file of the Gun Control.
+  As you can see, the rules are made of three parts:
+  
+  - A name indicates which rule to check
+  - A condition indicates in what condition it will run
+  - A DoesClear indicates whether the mod processes that ped if matched
+  
+  The "False" option of the DoesClear overrides all options, means the LevelOfArmed
+  etc. will not be respected whenever DoesClear is set to false to a Cop condition.
+  
+  There are two conditions available:
+  
+  - Cop: Applies to cops. If condition "True" the rule applies to cops; otherwise applies to every ped that is not cop
+  - GangMember: If condition "True" the rule applies to gang members; otherwise applies to every ped that is not gang member
+  
+  Note that having too many rules will slow down GunControl processing speed, thus decreasing FPS.
+  It is recommended that you set a reasonable interval between each ped to increase frame rate.
+-->
+
+<Rules>
+  <Rule>
+    <Name>GangMember</Name>
+    <Condition>True</Condition>
+    <DoesClear>False</DoesClear>
+  </Rule>
+</Rules>

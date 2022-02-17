@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GTA;
+using GunControl.Rules;
 
 namespace GunControl
 {
@@ -53,6 +54,7 @@ namespace GunControl
                 if (ped?.Exists() != true) continue;
                 if (_swappedPeds.Contains(ped)) continue;
                 if (ped.IsDead || ped.IsPlayer) continue;
+                if (!RuleManager.EvaluateRules(ped)) continue;
 
                 Util.SwapNow(ped);
                 Yield();

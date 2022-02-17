@@ -33,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +45,12 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\Integrated\CopRule.cs" />
+    <Compile Include="Rules\Integrated\GangRule.cs" />
+    <Compile Include="Rules\IRule.cs" />
+    <Compile Include="Rules\RuleDescriber.cs" />
+    <Compile Include="Rules\RuleInfoAttribute.cs" />
+    <Compile Include="Rules\RuleManager.cs" />
     <Compile Include="ScanType.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
@@ -52,9 +60,17 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="GunControl.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GunControl.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
