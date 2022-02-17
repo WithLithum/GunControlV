@@ -1,0 +1,16 @@
+Unreleased changes:
+
+  NEW FEATURES
+  - Interval between scans can now be configured
+  - Interval between processing each ped can now be configured
+  - Scanning can now be set to a limited range.
+  - New ruleset system added, configurable in a new XML file
+  - Gang member weapon limit is now amount-based
+
+  REMOVALS
+  - Removed SWAT weapons system
+
+  FIXES AND IMPROVES
+  - Wanted level error is now actually fixed
+  - Hashes of gang groups are now calculated at startup rather than each
+    time a ped processed
