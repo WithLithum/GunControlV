@@ -62,6 +62,7 @@ namespace GunControl
 
             RuleManager.RegisterRule("Cop", typeof(CopRule));
             RuleManager.RegisterRule("GangMember", typeof(GangRule));
+            RuleManager.RegisterRule("IsModel", typeof(ModelRule));
 
             foreach (var rule in ruleset.Contents)
             {
