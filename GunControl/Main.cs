@@ -49,7 +49,7 @@ namespace GunControl
 
             var parser = new XmlSerializer(typeof(Rules.Rules));
             Rules.Rules ruleset;
-            
+
             using (var stream = File.OpenRead("scripts\\GunControl.xml"))
             {
                 ruleset = parser.Deserialize(stream) as Rules.Rules;

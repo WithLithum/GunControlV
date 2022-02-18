@@ -13,6 +13,7 @@ namespace GunControl
         internal static int MaximumGangWeaponCount { get; set; }
 
         private static readonly List<Ped> _gangMembers = new List<Ped>();
+        private static readonly int CopGroupHash = Game.GenerateHash("COP");
 
         internal static bool IsGangMember(this Ped ped)
         {
@@ -31,8 +32,8 @@ namespace GunControl
         internal static bool IsCop(this Ped ped)
         {
             // The check is simple too
-            // TODO: use hash instead of string
-            return ped.RelationshipGroup == "COP";
+
+            return ped.RelationshipGroup == CopGroupHash;
         }
 
         internal static Ped[] ScanPeds()
@@ -87,7 +88,7 @@ namespace GunControl
                 if (_gangMembers.Count > MaximumGangWeaponCount)
                 {
                     // Remove weapons at this time
-                    // TODO: Add melee weapons that is configurable in INI
+
                     ped.Weapons.RemoveAll();
                     return;
                 }
