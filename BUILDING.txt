@@ -1,0 +1,5 @@
+First things first, you'll need Visual Studio 2022 to build this project.
+
+Double-click the GunControl.sln. And, select the configuration you want.
+In Debug mode, additional information is provided for diagnostics, and in
+RELEASE mode, it won't provide extra information.
