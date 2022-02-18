@@ -6,18 +6,23 @@ namespace GunControl.Rules.Integrated
     [RuleInfo("GangMember")]
     public class GangRule : IRule
     {
+        private bool _invalidNotified;
+
         public string Condition { get; set; }
 
         public bool OutcomeIfMeet { get; set; }
 
         public bool Evaluate(Ped ped)
         {
-            if (!bool.TryParse(Condition, out bool result))
+            if (_invalidNotified || !bool.TryParse(Condition, out bool result))
             {
-#if DEBUG
-                Screen.ShowSubtitle($"Invalid value - {Condition} (should be {bool.TrueString} or {bool.FalseString})");
-#endif
-                // Go ahead and ignore
+                // So we don't waste more time setting values here.
+                if (!_invalidNotified)
+                {
+                    Notification.Show("~y~GunControl Warning:~s~ One of the GangMember rules has invalid ~r~\"Condition\"~s~ value. It shoule be either ~b~\"True\"~s~ or ~b~\"False\"~s~ and it is ~r~case-sensitive~s~.");
+                    _invalidNotified = true;
+                }
+
                 return true;
             }
 
